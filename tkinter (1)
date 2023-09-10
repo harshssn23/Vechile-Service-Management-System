@@ -1,0 +1,93 @@
+from tkinter import *
+from lqproj import LinkedQueue
+from llproj import LinkedList
+class Worker:
+    def __init__(self,id,name):
+        self._name=name
+        self._id=id
+        self._works=LinkedQueue()
+    def __str__(self):
+        strg="Name:"+str(self._name)+"\nID  :"+str(self._id)
+        return strg
+    def addservice(self,service):
+        self._works.enqueue(service)
+    def removeservice(self):
+        self._works.dequeue()
+w1=Worker("W01","Ram")
+w2=Worker("W02","Krish")
+w3=Worker("W03","Shiv")
+w4=Worker("W04","Balaji")
+w5=Worker("W05","Vicky")
+print(w1)
+WorkersList=LinkedList()
+WorkersList.insert(w1)
+WorkersList.insert(w2)
+WorkersList.insert(w3)
+WorkersList.insert(w4)
+WorkersList.insert(w5)
+
+p=WorkersList.retrieve()
+root = Tk()
+root.title("Admin Login")
+root.geometry('350x200')
+def frame(r):
+    def deli():
+        work(f)
+    r.destroy()
+    f=Tk()
+    f.title("Admin Page")
+    f.geometry('300x120')
+    l1=Button(f,text="Customer details")
+    l1.grid(row=0,column=0)
+    l2=Button(f,text="Services details")
+    l2.grid(row=1,column=0)
+    l3=Button(f,text="Pending services details")
+    l3.grid(row=2,column=0)
+    l4=Button(f,text="Workers details",command=deli).grid(row=3,column=0)
+
+def work(f):
+    def search():
+        if w11.get()=="w1":
+            s=Label(w,text=w1.__str__()).grid(row=5,column=1)
+        elif w11.get()=="w2":
+            s=Label(w,text=w2.__str__()).grid(row=5,column=1)
+        elif w11.get()=="w3":
+            s=Label(w,text=w3.__str__()).grid(row=5,column=1)
+        elif w11.get()=="w4":
+            s=Label(w,text=w4.__str__()).grid(row=5,column=1)
+        elif w11.get()=="w5":
+            s=Label(w,text=w5.__str__()).grid(row=5,column=1)
+        else:
+            s=Label(w,text="Enter valid id").grid(row=5,column=1)                      
+    f.destroy()
+    w=Tk()
+    w.title("Workers")
+    w.geometry("300x120")
+    wk=Label(w,text="Enter the worker id")
+    wk.grid(row=1,column=0)
+    w11=Entry(w)
+    w11.grid(row=1,column=1)
+    search=Button(w,text="SEARCH",command=search).grid(row=3,column=1)
+    exit=Button(w,text="EXIT",command=w.destroy).grid(row=7,column=1)
+def screen1():
+    def submit():
+        if lbl11.get()=="Bike24/7" and lbl21.get()=="Bk@7":
+            frame(root)
+        else:
+            l=Label(root,text="Invalid Login or password")
+            l.grid(row=2,column=1)
+
+    lbl1 = Label(root, text = "User Name: ")
+    lbl1.grid(row=0,column=0)
+    lbl11 = Entry(root)
+    lbl11.grid(row=0,column=1)
+    lbl2 = Label(root, text = "PASSWORD")
+    lbl2.grid(row=1,column=0)
+    lbl21 = Entry(root)
+    lbl21.grid(row=1,column=1)
+    l=[lbl11,lbl21]
+    sub_btn=Button(root,text="PROCEED",command=submit).grid(row=6,column=1)
+
+    exit_btn=Button(root,text="EXIT",command=root.destroy).grid(row=8,column=1)
+screen1()
+mainloop()
